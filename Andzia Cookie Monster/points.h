@@ -21,6 +21,7 @@ public:
 	points();
 	~points();
 	void increasePkt();
+	void setPos(int x);
 };
 
 #endif // POINTS_H

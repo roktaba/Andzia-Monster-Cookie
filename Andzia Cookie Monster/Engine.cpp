@@ -14,7 +14,7 @@ Engine::~Engine()
 int Engine::runGame(sf::RenderWindow &window)
 {
 	Player player1;
-	// points cakesPkt;
+	points cakesPkt;
 	statusBar healthCounter;
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(1280, 960));
 	std::vector <statusBar> healthBar;
@@ -162,6 +162,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		window.clear();
 		window.setView(view);
 		lvl1Background.setPos(player1.getPlayerPos().x);
+		cakesPkt.setPos(player1.getPlayerPos().x);
 		for (int i = 0; i<healthBar.size(); i++)
 		{
 			healthBar[i].update(dt);
@@ -194,7 +195,7 @@ int Engine::runGame(sf::RenderWindow &window)
 			window.draw(martweCiastko[i]);
 		}
 		player1.drawAmmo(window);
-		//    window.draw(cakesPkt);
+		window.draw(cakesPkt);
 		for (int i = 0; i<healthBar.size(); i++)
 		{
 			window.draw(healthBar[i]);
