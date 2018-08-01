@@ -137,6 +137,14 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			player1.collision(0.0, platform[i].tileMap);
 		}
+		for (int i = 0; i<martweCiastko.size(); i++)
+		{
+			if (player1.collision(1.0, martweCiastko[i].mobSprite))
+			{
+				martweCiastko.erase(martweCiastko.begin() + martweCiastko.size() - 1);
+				cakesPkt.increasePkt();
+			}
+		}
 		for (int i = 0; i<platform.size(); i++)
 		{
 			player1.arrowCollision(platform[i].tileMap, false);

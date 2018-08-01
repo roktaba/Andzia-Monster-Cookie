@@ -16,6 +16,7 @@ private:
 	std::string pktString;
 	int pkt;
 	sf::Font pointsFont;
+	std::string ix = "x ";
 
 public:
 	points();

@@ -10,10 +10,13 @@ points::points()
 	}
 	pkt = 0;
 	std::string pktString = std::to_string(pkt);
+	ix = "x";
+	pktString = ix + pktString;
 	cakesPoints.setString(pktString);
 	cakesPoints.setFont(pointsFont);
-	cakesPoints.setFillColor(sf::Color::Blue);
-	cakesPoints.setPosition(100, 20);
+	cakesPoints.setFillColor(sf::Color::Magenta);
+	cakesPoints.setCharacterSize(40);
+	cakesPoints.setPosition(200, 20);
 }
 
 points::~points()
@@ -29,10 +32,13 @@ void points::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void points::increasePkt()
 {
 	pkt++;
+	std::string pktString = std::to_string(pkt);
+	pktString = ix + pktString;
+	cakesPoints.setString(pktString);
 }
 
 void points::setPos(int x)
 {
-	sf::Vector2f sizeWindow(x-300, cakesPoints.getPosition().y);
+	sf::Vector2f sizeWindow(x-280, cakesPoints.getPosition().y);
 	cakesPoints.setPosition(sizeWindow);
 }
