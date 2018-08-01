@@ -28,6 +28,8 @@ int Engine::runGame(sf::RenderWindow &window)
 		healthBar.push_back(healthCounter);
 	}
 	DeathCake DCiastko;
+	DeathCake cakeCounter;
+	cakeCounter.setNewPossition(-250, -5);
 	Cake cake1;
 	Level lvl;
 	Background lvl1Background(window.getSize().x, window.getSize().y);
@@ -171,6 +173,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		window.setView(view);
 		lvl1Background.setPos(player1.getPlayerPos().x);
 		cakesPkt.setPos(player1.getPlayerPos().x);
+		cakeCounter.setPos(player1.getPlayerPos().x);
 		for (int i = 0; i<healthBar.size(); i++)
 		{
 			healthBar[i].update(dt);
@@ -203,6 +206,7 @@ int Engine::runGame(sf::RenderWindow &window)
 			window.draw(martweCiastko[i]);
 		}
 		player1.drawAmmo(window);
+		window.draw(cakeCounter);
 		window.draw(cakesPkt);
 		for (int i = 0; i<healthBar.size(); i++)
 		{

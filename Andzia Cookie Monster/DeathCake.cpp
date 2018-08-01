@@ -18,10 +18,11 @@ DeathCake::DeathCake()
 	imgCounter = 0;
 	velocity.x = 0;
 	velocity.y = 0;
-	mobSprite.setTextureRect(sf::IntRect(0, imgHeight * 2, imgWidth, imgHeight));
+	mobSprite.setTextureRect(sf::IntRect(0, ((imgHeight * 2)+5), imgWidth, imgHeight));
 	mobSprite.setOrigin(-15, 0);
 	grounded = false;
 	timer.restart();
+	mobSprite.setScale(0.6, 0.6);
 }
 
 DeathCake::~DeathCake()
@@ -48,4 +49,10 @@ void DeathCake::uptade(float dt)
 			mobSprite.setScale(0.7, 0.7);
 		}
 	}
+}
+
+void DeathCake::setPos(int x)
+{
+	sf::Vector2f sizeWindow(x - 350, mobSprite.getPosition().y);
+	mobSprite.setPosition(sizeWindow);
 }
