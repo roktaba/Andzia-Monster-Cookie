@@ -75,7 +75,7 @@ int Engine::runGame(sf::RenderWindow &window)
 						if (tabLvl[j][i] == 17)
 						{
 							ciastko.push_back(cake1);
-							ciastko[ciastko.size() - 1].setNewPossition(i, j, platform[0].tileSize());
+							ciastko[ciastko.size() - 1].setNewPossition(i, j, lvl.tileSize());
 						}
 					}
 				}
@@ -155,7 +155,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			if (player1.collision(0.0, ciastko[i].mobSprite))
 			{
-				healthBar.erase(healthBar.begin() + healthBar.size() - 1);
+				healthBar.erase(healthBar.begin() + healthBar.size()-1);
 				player1.setStartPos();
 			}
 		}
