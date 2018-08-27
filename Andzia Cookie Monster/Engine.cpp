@@ -21,6 +21,7 @@ int Engine::runGame(sf::RenderWindow &window)
 	std::vector <Level> platform;
 	std::vector <Level> platformNonCol;
 	std::vector <Level> platformBlocker;
+	std::vector <Level> platformGravity;
 	std::vector <Cake> ciastko;
 	std::vector <DeathCake> martweCiastko;
 	for (int i = 0; i<player1.howManyLifes(); i++)
@@ -71,6 +72,12 @@ int Engine::runGame(sf::RenderWindow &window)
 							platformBlocker.push_back(lvl);
 							platformBlocker[platformBlocker.size() - 1].setNewPossiotion(i, j);
 							platformBlocker[platformBlocker.size() - 1].changeTexture(tabLvl[j][i]);
+						}
+						if (tabLvl[j][i] == 9)
+						{
+							platformGravity.push_back(lvl);
+							platformGravity[platformGravity.size() - 1].setNewPossiotion(i, j);
+							platformGravity[platformGravity.size() - 1].changeTexture(tabLvl[j][i]);
 						}
 						if (tabLvl[j][i] == 17)
 						{
@@ -139,6 +146,11 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			player1.collision(0.0, platform[i].tileMap);
 		}
+		for (int i = 0; i<platformGravity.size(); i++)
+		{
+			if (player1.collision(0.0, platformGravity[i].tileMap))
+				platformGravity[i].update(dt);
+		}
 		for (int i = 0; i<martweCiastko.size(); i++)
 		{
 			if (player1.collision(1.0, martweCiastko[i].mobSprite))
@@ -182,6 +194,11 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			healthBar[i].setPos(player1.getPlayerPos().x, i);
 		}
+		for (int i = 0; i<ciastko.size(); i++)
+		{
+			if (ciastko[i].getPos() < -300)
+				ciastko.erase(ciastko.begin() + i);
+		}
 		//DRAW PART//
 		for (int i = 0; i<platformBlocker.size(); i++)
 		{
@@ -195,6 +212,10 @@ int Engine::runGame(sf::RenderWindow &window)
 		for (int i = 0; i<platformNonCol.size(); i++)
 		{
 			window.draw(platformNonCol[i]);
+		}
+		for (int i = 0; i<platformGravity.size(); i++)
+		{
+			window.draw(platformGravity[i]);
 		}
 		window.draw(player1);
 		for (int i = 0; i<ciastko.size(); i++)

@@ -31,6 +31,7 @@ public:
 	bool collision(float push, sf::Sprite &other);
 	void changeDirection();
 	void setNewPossition(int i, int j, sf::Vector2f tileSize);
+	float getPos();
 
 };
 

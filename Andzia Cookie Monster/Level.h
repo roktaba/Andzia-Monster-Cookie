@@ -15,6 +15,8 @@ private:
 	sf::Texture tileMapTexture;
 	sf::Texture *wskTileMapTexture;
 	float imgWidth, imgHeight;
+	sf::Vector2f velocity;
+	float posY;
 
 public:
 	sf::Sprite tileMap;
@@ -23,6 +25,7 @@ public:
 	void setNewPossiotion(int i, int j);
 	void changeTexture(int counter);
 	sf::Vector2f tileSize();
+	void update(float dt);
 };
 
 #endif // LEVEL_H

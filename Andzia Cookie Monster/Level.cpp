@@ -14,6 +14,9 @@ Level::Level()
 	tileMap.setTextureRect(sf::IntRect(0, 0, imgWidth, imgHeight));
 	tileMap.setScale(1.5, 1.5);
 	tileMap.setPosition(0, 0);
+	velocity.x = 0;
+	velocity.y = 0;
+	posY = 0;
 }
 
 Level::~Level()
@@ -29,6 +32,7 @@ void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void Level::setNewPossiotion(int i, int j)
 {
 	tileMap.setPosition(((i*imgHeight*1.5) - 3 * imgWidth), (j*imgWidth*1.5));
+	posY = tileMap.getPosition().y;
 }
 
 void Level::changeTexture(int counter)
@@ -59,6 +63,9 @@ void Level::changeTexture(int counter)
 	case 8:
 		tileMap.setTextureRect(sf::IntRect(imgWidth * 2, imgHeight, imgWidth, imgHeight));
 		break;
+	case 9:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 2, imgHeight * 3, imgWidth, imgHeight));
+		break;
 	case 72:
 		tileMap.setTextureRect(sf::IntRect(imgWidth * 9, 0, imgWidth, imgHeight));
 		break;
@@ -70,4 +77,10 @@ void Level::changeTexture(int counter)
 sf::Vector2f Level::tileSize()
 {
 	return sf::Vector2f(imgWidth, imgHeight);
+}
+
+void Level::update(float dt)
+{
+	velocity.y += 981 * dt;
+	tileMap.setPosition(tileMap.getPosition().x, posY + velocity.y);
 }

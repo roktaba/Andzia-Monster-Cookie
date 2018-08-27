@@ -130,3 +130,8 @@ void Cake::setNewPossition(int i, int j, sf::Vector2f tileSize)
 {
 	mobSprite.setPosition(((i*tileSize.y*1.5) - 3 * tileSize.x), (j*tileSize.x*1.5));
 }
+
+float Cake::getPos()
+{
+	return mobSprite.getPosition().y;
+}
