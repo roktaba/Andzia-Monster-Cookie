@@ -25,7 +25,6 @@ public:
 	void setNewPossiotion(int i, int j);
 	void changeTexture(int counter);
 	sf::Vector2f tileSize();
-	void update(float dt);
 };
 
 #endif // LEVEL_H

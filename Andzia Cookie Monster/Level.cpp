@@ -69,6 +69,71 @@ void Level::changeTexture(int counter)
 	case 72:
 		tileMap.setTextureRect(sf::IntRect(imgWidth * 9, 0, imgWidth, imgHeight));
 		break;
+	case 51:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 2, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 50:
+		tileMap.setTextureRect(sf::IntRect(imgWidth, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 49:
+		tileMap.setTextureRect(sf::IntRect(0, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 52:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 3, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 53:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 4, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 54:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 5, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 55:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 10, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 56:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 11, imgHeight * 4, imgWidth, imgHeight));
+		break;
+	case 57:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 2, imgHeight * 6, imgWidth, imgHeight));
+		break;
+	case 58:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 4, imgHeight, imgWidth, imgHeight));
+		tileMap.setScale(1, 1);
+		tileMap.setPosition(tileMap.getPosition().x, (tileMap.getPosition().y + 40));
+		break;
+	case 59:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 3, imgHeight*2, imgWidth, imgHeight));
+		break;
+	case 60:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 5, imgHeight * 5, imgWidth, imgHeight));
+		break;
+	case 61:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 6, imgHeight * 5, imgWidth, imgHeight));
+		break;
+	case 62:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 7, imgHeight * 5, imgWidth, imgHeight));
+		break;
+	case 63:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 5, imgHeight * 6, imgWidth, imgHeight));
+		break;
+	case 64:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 6, imgHeight * 6, imgWidth, imgHeight));
+		break;
+	case 65:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 7, imgHeight * 6, imgWidth, imgHeight));
+		break;
+	case 66:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 3, imgHeight * 5, imgWidth, imgHeight));
+		break;
+	case 67:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 4, imgHeight * 5, imgWidth, imgHeight));
+		break;
+	case 68:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 3, imgHeight * 6, imgWidth, imgHeight));
+		break;
+	case 69:
+		tileMap.setTextureRect(sf::IntRect(imgWidth * 4, imgHeight * 6, imgWidth, imgHeight));
+		break;
 	default:
 		break;
 	}
@@ -77,10 +142,4 @@ void Level::changeTexture(int counter)
 sf::Vector2f Level::tileSize()
 {
 	return sf::Vector2f(imgWidth, imgHeight);
-}
-
-void Level::update(float dt)
-{
-	velocity.y += 981 * dt;
-	tileMap.setPosition(tileMap.getPosition().x, posY + velocity.y);
 }

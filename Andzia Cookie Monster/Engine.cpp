@@ -21,7 +21,8 @@ int Engine::runGame(sf::RenderWindow &window)
 	std::vector <Level> platform;
 	std::vector <Level> platformNonCol;
 	std::vector <Level> platformBlocker;
-	std::vector <Level> platformGravity;
+	std::vector <Level> platformKilling;
+	std::vector <Level> platformBox;
 	std::vector <Cake> ciastko;
 	std::vector <DeathCake> martweCiastko;
 	for (int i = 0; i<player1.howManyLifes(); i++)
@@ -55,13 +56,13 @@ int Engine::runGame(sf::RenderWindow &window)
 					tabLvl[j][i] = (line[i] - '0');
 					if (tabLvl[j][i] != 0)
 					{
-						if ((tabLvl[j][i] == 1) || (tabLvl[j][i] == 2) || (tabLvl[j][i] == 3) || (tabLvl[j][i] == 6) || (tabLvl[j][i] == 7) || (tabLvl[j][i] == 8))
+						if ((tabLvl[j][i] == 1) || (tabLvl[j][i] == 2) || (tabLvl[j][i] == 3) || (tabLvl[j][i] == 6) || (tabLvl[j][i] == 7) || (tabLvl[j][i] == 8) || (tabLvl[j][i] == 9) || (tabLvl[j][i] == 51) || (tabLvl[j][i] == 50) || (tabLvl[j][i] == 49) || (tabLvl[j][i] == 63) || (tabLvl[j][i] == 64) || (tabLvl[j][i] == 65) || (tabLvl[j][i] == 66) || (tabLvl[j][i] == 67) || (tabLvl[j][i] == 68) || (tabLvl[j][i] == 69))
 						{
 							platform.push_back(lvl);
 							platform[platform.size() - 1].setNewPossiotion(i, j);
 							platform[platform.size() - 1].changeTexture(tabLvl[j][i]);
 						}
-						if ((tabLvl[j][i] == 4) || (tabLvl[j][i] == 5))
+						if ((tabLvl[j][i] == 4) || (tabLvl[j][i] == 5) || (tabLvl[j][i] == 52) || (tabLvl[j][i] == 53) || (tabLvl[j][i] == 54) || (tabLvl[j][i] == 55) || (tabLvl[j][i] == 56) || (tabLvl[j][i] == 57) || (tabLvl[j][i] == 60) || (tabLvl[j][i] == 61) || (tabLvl[j][i] == 62))
 						{
 							platformNonCol.push_back(lvl);
 							platformNonCol[platformNonCol.size() - 1].setNewPossiotion(i, j);
@@ -73,11 +74,17 @@ int Engine::runGame(sf::RenderWindow &window)
 							platformBlocker[platformBlocker.size() - 1].setNewPossiotion(i, j);
 							platformBlocker[platformBlocker.size() - 1].changeTexture(tabLvl[j][i]);
 						}
-						if (tabLvl[j][i] == 9)
+						if (tabLvl[j][i] == 58)
 						{
-							platformGravity.push_back(lvl);
-							platformGravity[platformGravity.size() - 1].setNewPossiotion(i, j);
-							platformGravity[platformGravity.size() - 1].changeTexture(tabLvl[j][i]);
+							platformKilling.push_back(lvl);
+							platformKilling[platformKilling.size() - 1].setNewPossiotion(i, j);
+							platformKilling[platformKilling.size() - 1].changeTexture(tabLvl[j][i]);
+						}
+						if (tabLvl[j][i] == 59)
+						{
+							platformBox.push_back(lvl);
+							platformBox[platformBox.size() - 1].setNewPossiotion(i, j);
+							platformBox[platformBox.size() - 1].changeTexture(tabLvl[j][i]);
 						}
 						if (tabLvl[j][i] == 17)
 						{
@@ -146,10 +153,9 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			player1.collision(0.0, platform[i].tileMap);
 		}
-		for (int i = 0; i<platformGravity.size(); i++)
+		for (int i = 0; i<platformBox.size(); i++)
 		{
-			if (player1.collision(0.0, platformGravity[i].tileMap))
-				platformGravity[i].update(dt);
+			player1.collision(0.0, platformBox[i].tileMap);
 		}
 		for (int i = 0; i<martweCiastko.size(); i++)
 		{
@@ -171,6 +177,14 @@ int Engine::runGame(sf::RenderWindow &window)
 				player1.setStartPos();
 			}
 		}
+		for (int i = 0; i<platformKilling.size(); i++)
+		{
+			if (player1.collision(0.0, platformKilling[i].tileMap))
+			{
+				healthBar.erase(healthBar.begin() + healthBar.size() - 1);
+				player1.setStartPos();
+			}
+		}
 		for (int i = 0; i<ciastko.size(); i++)
 		{
 			if (player1.arrowCollision(ciastko[i].mobSprite, true))
@@ -179,6 +193,11 @@ int Engine::runGame(sf::RenderWindow &window)
 				martweCiastko[martweCiastko.size() - 1].setNewPossition(ciastko[i].mobSprite.getPosition().x, ciastko[i].mobSprite.getPosition().y);
 				ciastko.erase(ciastko.begin() + i);
 			}
+		}
+		for (int i = 0; i<platformBox.size(); i++)
+		{
+			if (player1.arrowCollision(platformBox[i].tileMap, true))
+				platformBox.erase(platformBox.begin() + i);
 		}
 		view.setCenter((player1.getPlayerPos().x + 300), (window.getSize().y / 2));
 		window.clear();
@@ -213,9 +232,13 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			window.draw(platformNonCol[i]);
 		}
-		for (int i = 0; i<platformGravity.size(); i++)
+		for (int i = 0; i<platformKilling.size(); i++)
 		{
-			window.draw(platformGravity[i]);
+			window.draw(platformKilling[i]);
+		}
+		for (int i = 0; i<platformBox.size(); i++)
+		{
+			window.draw(platformBox[i]);
 		}
 		window.draw(player1);
 		for (int i = 0; i<ciastko.size(); i++)
