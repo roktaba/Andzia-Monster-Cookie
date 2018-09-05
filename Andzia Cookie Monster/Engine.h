@@ -16,7 +16,7 @@ class Engine :public sf::RenderWindow
 {
 private:
 	Player player1;
-	int tabLvl[10][50];
+	int tabLvl[10][150];
 	bool mapLoaded;
 	int mapCounter;
 
