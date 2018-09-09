@@ -135,6 +135,7 @@
     <ClCompile Include="Ammunition.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Cake.cpp" />
+    <ClCompile Include="CakeBoss.cpp" />
     <ClCompile Include="DeathCake.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameMenu.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Ammunition.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Cake.h" />
+    <ClInclude Include="CakeBoss.h" />
     <ClInclude Include="DeathCake.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameMenu.h" />

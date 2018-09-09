@@ -10,6 +10,7 @@
 #include "DeathCake.h"
 #include "statusBar.h"
 #include "points.h"
+#include "CakeBoss.h"
 
 
 class Engine :public sf::RenderWindow

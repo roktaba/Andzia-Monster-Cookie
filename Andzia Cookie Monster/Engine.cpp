@@ -24,6 +24,7 @@ int Engine::runGame(sf::RenderWindow &window)
 	std::vector <Level> platformKilling;
 	std::vector <Level> platformBox;
 	std::vector <Cake> ciastko;
+	std::vector <CakeBoss> Boss;
 	std::vector <DeathCake> martweCiastko;
 	for (int i = 0; i<player1.howManyLifes(); i++)
 	{
@@ -34,6 +35,7 @@ int Engine::runGame(sf::RenderWindow &window)
 	cakeCounter.setNewPossition(-250, -5);
 	Cake cake1;
 	Level lvl;
+	CakeBoss CakeB;
 	Background lvl1Background(window.getSize().x, window.getSize().y);
 	if (mapLoaded == false)
 	{
@@ -90,6 +92,11 @@ int Engine::runGame(sf::RenderWindow &window)
 						{
 							ciastko.push_back(cake1);
 							ciastko[ciastko.size() - 1].setNewPossition(i, j, lvl.tileSize());
+						}
+						if (tabLvl[j][i] == 70)
+						{
+							Boss.push_back(CakeB);
+							Boss[Boss.size() - 1].setNewPossition(i, j, lvl.tileSize());
 						}
 					}
 				}
@@ -248,6 +255,10 @@ int Engine::runGame(sf::RenderWindow &window)
 		for (int i = 0; i<martweCiastko.size(); i++)
 		{
 			window.draw(martweCiastko[i]);
+		}
+		for (int i = 0; i<Boss.size(); i++)
+		{
+			window.draw(Boss[i]);
 		}
 		player1.drawAmmo(window);
 		window.draw(cakeCounter);
