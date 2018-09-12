@@ -24,10 +24,21 @@ CakeBoss::CakeBoss()
 	mobSprite.setOrigin(-15, 0);
 	grounded = false;
 	timer.restart();
+	bossTimer.restart();
 }
 
 
 CakeBoss::~CakeBoss()
 {
 	std::cout << "CakeBoss destroyed" << std::endl;
+}
+
+int CakeBoss::checkTimer()
+{
+	return bossTimer.getElapsedTime().asSeconds();
+}
+
+void CakeBoss::restartBossTimer()
+{
+	bossTimer.restart();
 }

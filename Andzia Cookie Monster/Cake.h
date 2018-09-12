@@ -12,7 +12,6 @@ protected:
 	int hp;
 	int speed;
 	bool canHurt;
-	bool isAlive;
 	sf::Texture mobTexture;
 	sf::Texture *wskmobTexture;
 	sf::Vector2f velocity;
@@ -24,6 +23,7 @@ protected:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 public:
+	bool isAlive;
 	sf::Sprite mobSprite;
 	Cake();
 	~Cake();
@@ -32,6 +32,7 @@ public:
 	void changeDirection();
 	void setNewPossition(int i, int j, sf::Vector2f tileSize);
 	float getPos();
+	void setVelocityY();
 
 };
 

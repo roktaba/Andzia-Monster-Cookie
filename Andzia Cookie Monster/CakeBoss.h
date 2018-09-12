@@ -9,5 +9,9 @@ class CakeBoss: public Cake
 public:
 	CakeBoss();
 	~CakeBoss();
+	int checkTimer();
+	void restartBossTimer();
+private:
+	sf::Clock bossTimer;
 };
 

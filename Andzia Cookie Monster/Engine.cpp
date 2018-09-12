@@ -16,6 +16,8 @@ int Engine::runGame(sf::RenderWindow &window)
 	Player player1;
 	points cakesPkt;
 	statusBar healthCounter;
+	CakeBoss Boss;
+	Boss.isAlive = false;
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(1280, 960));
 	std::vector <statusBar> healthBar;
 	std::vector <Level> platform;
@@ -24,7 +26,6 @@ int Engine::runGame(sf::RenderWindow &window)
 	std::vector <Level> platformKilling;
 	std::vector <Level> platformBox;
 	std::vector <Cake> ciastko;
-	std::vector <CakeBoss> Boss;
 	std::vector <DeathCake> martweCiastko;
 	for (int i = 0; i<player1.howManyLifes(); i++)
 	{
@@ -35,7 +36,6 @@ int Engine::runGame(sf::RenderWindow &window)
 	cakeCounter.setNewPossition(-250, -5);
 	Cake cake1;
 	Level lvl;
-	CakeBoss CakeB;
 	Background lvl1Background(window.getSize().x, window.getSize().y);
 	if (mapLoaded == false)
 	{
@@ -95,8 +95,8 @@ int Engine::runGame(sf::RenderWindow &window)
 						}
 						if (tabLvl[j][i] == 70)
 						{
-							Boss.push_back(CakeB);
-							Boss[Boss.size() - 1].setNewPossition(i, j, lvl.tileSize());
+							Boss.setNewPossition(i, j, lvl.tileSize());
+							Boss.isAlive = true;
 						}
 					}
 				}
@@ -129,17 +129,29 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			martweCiastko[i].uptade(dt);
 		}
-		if (!player1.checkLife(window.getSize().y))
+		if ((player1.getPlayerPos().y) > (window.getSize().y + 100))
 		{
-			if (healthBar.size()<2)
-			{
-				view.setCenter((window.getSize().x / 2), (window.getSize().y) / 2);
-				window.clear();
-				window.setView(view);
-				return 1;
-			}
 			healthBar.erase(healthBar.begin() + healthBar.size() - 1);
 			player1.setStartPos();
+		}
+		if (healthBar.size()==0)
+		{
+			view.setCenter((window.getSize().x / 2), (window.getSize().y) / 2);
+			window.clear();
+			window.setView(view);
+			return 1;
+		}
+		//BOSS//
+		if ((Boss.isAlive==true)&&(Boss.checkTimer() > 2))
+		{
+			ciastko.push_back(cake1);
+			Boss.restartBossTimer();
+			ciastko[ciastko.size() - 1].mobSprite.setPosition(Boss.mobSprite.getPosition().x, Boss.mobSprite.getPosition().y);
+			ciastko[ciastko.size() - 1].setVelocityY();
+			if (ciastko.size() % 2 == 0)
+			{
+				ciastko[ciastko.size() - 1].changeDirection();
+			}
 		}
 		//COLLISION PART//
 		for (int j = 0; j<ciastko.size(); j++)
@@ -176,11 +188,13 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			player1.arrowCollision(platform[i].tileMap, false);
 		}
+		std::cout << healthBar.size() << std::endl;
 		for (int i = 0; i<ciastko.size(); i++)
 		{
 			if (player1.collision(0.0, ciastko[i].mobSprite))
 			{
-				healthBar.erase(healthBar.begin() + healthBar.size()-1);
+				healthBar.erase(healthBar.begin() + healthBar.size() - 1);
+				std::cout << healthBar.size() << std::endl;
 				player1.setStartPos();
 			}
 		}
@@ -222,7 +236,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		}
 		for (int i = 0; i<ciastko.size(); i++)
 		{
-			if (ciastko[i].getPos() < -300)
+			if (ciastko[i].getPos() < 0)
 				ciastko.erase(ciastko.begin() + i);
 		}
 		//DRAW PART//
@@ -256,10 +270,8 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			window.draw(martweCiastko[i]);
 		}
-		for (int i = 0; i<Boss.size(); i++)
-		{
-			window.draw(Boss[i]);
-		}
+		if (Boss.isAlive)
+		window.draw(Boss);
 		player1.drawAmmo(window);
 		window.draw(cakeCounter);
 		window.draw(cakesPkt);

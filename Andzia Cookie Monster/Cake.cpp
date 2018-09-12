@@ -135,3 +135,9 @@ float Cake::getPos()
 {
 	return mobSprite.getPosition().y;
 }
+
+void Cake::setVelocityY()
+{
+	velocity.y = -800;
+	velocity.x = 50;
+}

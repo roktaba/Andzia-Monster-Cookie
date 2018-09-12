@@ -186,20 +186,6 @@ sf::Vector2f Player::getPlayerPos()
 	return playerSprite.getPosition();
 }
 
-void Player::changeLifeStatus()
-{
-	life--;
-}
-bool Player::checkLife(double y)
-{
-	if (getPlayerPos().y > (y + 100))
-	{
-		changeLifeStatus();
-		return false;
-	}
-	return true;
-}
-
 void Player::drawAmmo(sf::RenderWindow &window)
 {
 	for (int i = 0; i<AmmoH.size(); i++)
