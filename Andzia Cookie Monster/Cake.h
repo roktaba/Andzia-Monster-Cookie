@@ -33,6 +33,8 @@ public:
 	void setNewPossition(int i, int j, sf::Vector2f tileSize);
 	float getPos();
 	void setVelocityY();
+	void setVelocityX();
+	int getHP();
 
 };
 

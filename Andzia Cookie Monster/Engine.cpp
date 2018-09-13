@@ -121,6 +121,10 @@ int Engine::runGame(sf::RenderWindow &window)
 		//UPTADE PART//
 		float dt = deltaTime.restart().asSeconds();
 		player1.uptade(dt);
+		if (Boss.RAISE)
+		{
+			Boss.uptade(dt, player1.getPlayerPos().x);
+		}
 		for (int i = 0; i<ciastko.size(); i++)
 		{
 			ciastko[i].uptade(dt);
@@ -129,7 +133,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			martweCiastko[i].uptade(dt);
 		}
-		if ((player1.getPlayerPos().y) > (window.getSize().y + 100))
+		if (((player1.getPlayerPos().y) > (window.getSize().y + 100)) && (healthBar.size() > 0))
 		{
 			healthBar.erase(healthBar.begin() + healthBar.size() - 1);
 			player1.setStartPos();
@@ -142,7 +146,7 @@ int Engine::runGame(sf::RenderWindow &window)
 			return 1;
 		}
 		//BOSS//
-		if ((Boss.isAlive==true)&&(Boss.checkTimer() > 2))
+		if ((Boss.isAlive==true)&&(Boss.checkTimer() > 2)&&(Boss.RAISE))
 		{
 			ciastko.push_back(cake1);
 			Boss.restartBossTimer();
@@ -151,15 +155,26 @@ int Engine::runGame(sf::RenderWindow &window)
 			if (ciastko.size() % 2 == 0)
 			{
 				ciastko[ciastko.size() - 1].changeDirection();
+				ciastko[ciastko.size() - 1].setVelocityX();
 			}
 		}
 		//COLLISION PART//
+		if (Boss.RAISE)
+		if (((player1.collision(0.0, Boss.mobSprite))&&(healthBar.size() > 0)))
+		{
+		healthBar.erase(healthBar.begin() + healthBar.size() - 1);
+		player1.setPlayerPos(12000.0, 3.7);
+		}
 		for (int j = 0; j<ciastko.size(); j++)
 		{
 			for (int i = 0; i<platform.size(); i++)
 			{
 				ciastko[j].collision(0.0, platform[i].tileMap);
 			}
+		}
+		for (int i = 0; i<platform.size(); i++)
+		{
+			Boss.collision(0.0, platform[i].tileMap);
 		}
 		for (int j = 0; j<ciastko.size(); j++)
 		{
@@ -184,17 +199,24 @@ int Engine::runGame(sf::RenderWindow &window)
 				cakesPkt.increasePkt();
 			}
 		}
+		for (int i = 0; i<martweCiastko.size(); i++)
+		{
+			if (Boss.collision(1.0, martweCiastko[i].mobSprite))
+			{
+				martweCiastko.erase(martweCiastko.begin() + martweCiastko.size() - 1);
+				Boss.raiseOfLivingCake();
+				Boss.changeHP(15);
+			}
+		}
 		for (int i = 0; i<platform.size(); i++)
 		{
 			player1.arrowCollision(platform[i].tileMap, false);
 		}
-		std::cout << healthBar.size() << std::endl;
 		for (int i = 0; i<ciastko.size(); i++)
 		{
-			if (player1.collision(0.0, ciastko[i].mobSprite))
+			if ((player1.collision(0.0, ciastko[i].mobSprite)) && (healthBar.size() > 0))
 			{
 				healthBar.erase(healthBar.begin() + healthBar.size() - 1);
-				std::cout << healthBar.size() << std::endl;
 				player1.setStartPos();
 			}
 		}
@@ -214,6 +236,19 @@ int Engine::runGame(sf::RenderWindow &window)
 				martweCiastko[martweCiastko.size() - 1].setNewPossition(ciastko[i].mobSprite.getPosition().x, ciastko[i].mobSprite.getPosition().y);
 				ciastko.erase(ciastko.begin() + i);
 			}
+		}
+		if (player1.arrowCollision(Boss.mobSprite, true))
+		{
+			if ((!Boss.RAISE)&&(Boss.getHP() > 0))
+			{
+				Boss.RAISE = true;
+			}
+			Boss.changeHP(-1);
+		}
+		if (Boss.getHP() < 1)
+		{
+			Boss.RAISE = false;
+			Boss.dyingBoss(dt);
 		}
 		for (int i = 0; i<platformBox.size(); i++)
 		{

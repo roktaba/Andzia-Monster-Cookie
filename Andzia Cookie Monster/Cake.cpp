@@ -139,5 +139,15 @@ float Cake::getPos()
 void Cake::setVelocityY()
 {
 	velocity.y = -800;
-	velocity.x = 50;
+	velocity.x = 200;
+}
+
+void Cake::setVelocityX()
+{
+	velocity.x = -200;
+}
+
+int Cake::getHP()
+{
+	return hp;
 }

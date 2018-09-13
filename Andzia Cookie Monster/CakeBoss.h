@@ -11,7 +11,14 @@ public:
 	~CakeBoss();
 	int checkTimer();
 	void restartBossTimer();
+	void uptade(float dt, float playerX);
+	void raiseOfLivingCake();
+	void changeHP(int i);
+	bool RAISE;
+	void dyingBoss(float dt);
+	bool imgCounterDyingBoss;
 private:
 	sf::Clock bossTimer;
+	float scale;
 };
 

@@ -22,7 +22,6 @@ private:
 	int imgCounter;
 	bool canJump;
 	float jumpHeight;
-	sf::Sprite playerSprite;
 	int life;
 	bool faceRight;
 	AmmoHeart ammunitionHearts;
@@ -37,13 +36,13 @@ public:
 	void setJump();
 	bool collision(float push, sf::Sprite &other);
 	sf::Vector2f getPlayerPos();
-	void changeLifeStatus();
-	bool checkLife(double y);
 	void drawAmmo(sf::RenderWindow &window);
 	void eraseArrow(int numer);
 	bool arrowCollision(sf::Sprite &otherSprite, bool destroy);
 	void setStartPos();
 	int howManyLifes();
+	void setPlayerPos(float x, float y);
+	sf::Sprite playerSprite;
 };
 
 #endif // PLAYER_H

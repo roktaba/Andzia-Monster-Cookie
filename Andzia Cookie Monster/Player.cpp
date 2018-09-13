@@ -222,3 +222,8 @@ int Player::howManyLifes()
 {
 	return life;
 }
+
+void Player::setPlayerPos(float x, float y)
+{
+	playerSprite.setPosition(x, y);
+}
