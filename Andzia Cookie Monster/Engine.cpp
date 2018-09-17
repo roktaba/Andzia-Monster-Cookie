@@ -17,6 +17,7 @@ int Engine::runGame(sf::RenderWindow &window)
 	points cakesPkt;
 	statusBar healthCounter;
 	CakeBoss Boss;
+	WinPic AndziaWin(window.getSize().x, window.getSize().y);
 	Boss.isAlive = false;
 	sf::View view(sf::Vector2f(0, 0), sf::Vector2f(1280, 960));
 	std::vector <statusBar> healthBar;
@@ -146,7 +147,7 @@ int Engine::runGame(sf::RenderWindow &window)
 			return 1;
 		}
 		//BOSS//
-		if ((Boss.isAlive==true)&&(Boss.checkTimer() > 2)&&(Boss.RAISE))
+		if ((Boss.isAlive==true)&&(Boss.checkTimer() > 3)&&(Boss.RAISE))
 		{
 			ciastko.push_back(cake1);
 			Boss.restartBossTimer();
@@ -163,7 +164,7 @@ int Engine::runGame(sf::RenderWindow &window)
 		if (((player1.collision(0.0, Boss.mobSprite))&&(healthBar.size() > 0)))
 		{
 		healthBar.erase(healthBar.begin() + healthBar.size() - 1);
-		player1.setPlayerPos(12000.0, 3.7);
+		player1.setStartPos();
 		}
 		for (int j = 0; j<ciastko.size(); j++)
 		{
@@ -242,6 +243,7 @@ int Engine::runGame(sf::RenderWindow &window)
 			if ((!Boss.RAISE)&&(Boss.getHP() > 0))
 			{
 				Boss.RAISE = true;
+				player1.changeRespawnPoint();
 			}
 			Boss.changeHP(-1);
 		}
@@ -249,6 +251,26 @@ int Engine::runGame(sf::RenderWindow &window)
 		{
 			Boss.RAISE = false;
 			Boss.dyingBoss(dt);
+			if (Boss.checkTimer() > 5)
+			{
+				AndziaWin.setPosPic(player1.getPlayerPos().x);
+				window.clear();
+				window.draw(AndziaWin);
+				window.display();
+				while (true)
+				{
+					if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+						return 0;
+					sf::Event akcjaOkna;
+					while (window.pollEvent(akcjaOkna))
+					{
+						switch (akcjaOkna.type)
+						case sf::Event::Closed:
+						return 0;
+						break;
+					}
+				}
+			}
 		}
 		for (int i = 0; i<platformBox.size(); i++)
 		{

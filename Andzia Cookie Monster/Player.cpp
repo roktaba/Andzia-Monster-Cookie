@@ -23,8 +23,10 @@ Player::Player()
 	jumpHeight = 210;
 	timer.restart();
 	ammoTimer.restart();
-	life = 3;
+	life = 4;
 	playerSprite.setOrigin(-50, 0);
+	respawnPlace.x = 100;
+	respawnPlace.y = 300;
 }
 
 Player::~Player()
@@ -215,7 +217,7 @@ bool Player::arrowCollision(sf::Sprite &otherSprite, bool destroy)
 
 void Player::setStartPos()
 {
-	playerSprite.setPosition(100, 300);
+	playerSprite.setPosition(respawnPlace);
 }
 
 int Player::howManyLifes()
@@ -226,4 +228,10 @@ int Player::howManyLifes()
 void Player::setPlayerPos(float x, float y)
 {
 	playerSprite.setPosition(x, y);
+}
+
+void Player::changeRespawnPoint()
+{
+	respawnPlace.x = 12000.0;
+	respawnPlace.y = 3.7;
 }

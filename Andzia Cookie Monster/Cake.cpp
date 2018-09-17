@@ -26,7 +26,6 @@ Cake::Cake()
 
 Cake::~Cake()
 {
-	std::cout << "Cake destroyed" << std::endl;
 }
 
 void Cake::draw(sf::RenderTarget & target, sf::RenderStates states) const

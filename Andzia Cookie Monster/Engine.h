@@ -11,7 +11,7 @@
 #include "statusBar.h"
 #include "points.h"
 #include "CakeBoss.h"
-
+#include "WinPic.h"
 
 class Engine :public sf::RenderWindow
 {

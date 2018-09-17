@@ -14,7 +14,6 @@ Background::Background(int x, int y)
 
 Background::~Background()
 {
-	std::cout << "Background Destroyed" << std::endl;
 }
 
 void Background::draw(sf::RenderTarget & target, sf::RenderStates states) const

@@ -13,7 +13,7 @@ CakeBoss::CakeBoss()
 	mobSprite.setTexture(*wskmobTexture);
 	imgHeight = (mobTexture.getSize().y / 4);
 	imgWidth = (mobTexture.getSize().x / 9);
-	hp = 80;
+	hp = 40;
 	speed = 100;
 	canHurt = true;
 	isAlive = true;
@@ -33,7 +33,6 @@ CakeBoss::CakeBoss()
 
 CakeBoss::~CakeBoss()
 {
-	std::cout << "CakeBoss destroyed" << std::endl;
 }
 
 int CakeBoss::checkTimer()

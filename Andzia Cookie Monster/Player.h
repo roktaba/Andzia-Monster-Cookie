@@ -26,6 +26,7 @@ private:
 	bool faceRight;
 	AmmoHeart ammunitionHearts;
 	std::vector <AmmoHeart> AmmoH;
+	sf::Vector2f respawnPlace;
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
@@ -43,6 +44,7 @@ public:
 	int howManyLifes();
 	void setPlayerPos(float x, float y);
 	sf::Sprite playerSprite;
+	void changeRespawnPoint();
 };
 
 #endif // PLAYER_H

@@ -144,6 +144,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="points.cpp" />
     <ClCompile Include="statusBar.cpp" />
+    <ClCompile Include="WinPic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmmoHeart.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="points.h" />
     <ClInclude Include="statusBar.h" />
+    <ClInclude Include="WinPic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
