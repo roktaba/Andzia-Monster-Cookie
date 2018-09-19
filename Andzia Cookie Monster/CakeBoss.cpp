@@ -88,15 +88,13 @@ void CakeBoss::uptade(float dt, float playerX)
 
 void CakeBoss::raiseOfLivingCake()
 {
-	if (scale < 1.09)
+	if (scale < 1.05)
 	{
 		scale += 0.01;
 		mobSprite.scale(scale, scale);
 	}
 	velocity.y = -100;
 	mobSprite.setPosition(mobSprite.getPosition().x, (mobSprite.getPosition().y - 100));
-	std::cout << scale << std::endl;
-
 }
 
 void CakeBoss::changeHP(int i)

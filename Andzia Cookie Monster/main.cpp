@@ -8,7 +8,7 @@ int main()
 	unsigned int screenheight = 960;
 	enum gameState { MENU, GAME, GAME_CLOSE };
 	gameState state = MENU;
-	sf::RenderWindow window(sf::VideoMode(screenwidht, screenheight), "ANDZIA COOKIE MONSTER!", sf::Style::Titlebar | sf::Style::Close | sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(screenwidht, screenheight), "ANDZIA COOKIE MONSTER!", sf::Style::Titlebar | sf::Style::Close);
 
 	while (window.isOpen())
 	{
